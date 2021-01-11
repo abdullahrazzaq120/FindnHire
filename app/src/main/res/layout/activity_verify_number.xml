@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkblue"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".VerifyNumberActivity">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the code sent to your number"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/lightgrey" />
+
+    <EditText
+        android:id="@+id/editcode"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:hint="OPT Here!"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textColor="@color/lightgrey"
+        android:textColorHint="@color/lightgrey" />
+
+    <TextView
+        android:id="@+id/otp_incorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:text="Wrong OTP"
+        android:textColor="@color/lightgrey"
+        android:textSize="12dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btncode"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16sp"
+        android:background="@drawable/btn_style_for_profile"
+        android:gravity="center"
+        android:paddingLeft="8sp"
+        android:paddingRight="8sp"
+        android:text="Verify Code"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/resendCode"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:paddingLeft="8sp"
+        android:paddingRight="8sp"
+        android:text="Resend code     "
+        android:textColor="#fff"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressId"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp" />
+
+
+</LinearLayout>

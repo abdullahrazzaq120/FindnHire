@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.sortscript.publicworkdeveloper.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.sortscript.publicworkdeveloper.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_notification"
+        android:name="com.sortscript.publicworkdeveloper.ui.notification.NotificationFragment"
+        android:label="@string/menu_notification"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/nav_post"
+        android:name="com.sortscript.publicworkdeveloper.ui.post.PostFragment"
+        android:label="@string/menu_post"
+        tools:layout="@layout/fragment_post" />
+
+    <fragment
+        android:id="@+id/nav_howwework"
+        android:name="com.sortscript.publicworkdeveloper.ui.howwework.HowWeWorkFragment"
+        android:label="@string/menu_howwework"
+        tools:layout="@layout/fragment_howwework" />
+
+    <fragment
+        android:id="@+id/nav_helpline"
+        android:name="com.sortscript.publicworkdeveloper.ui.helpline.HelplineFragment"
+        android:label="@string/menu_helpline"
+        tools:layout="@layout/fragment_helpline" />
+
+    <fragment
+        android:id="@+id/nav_privacypolicy"
+        android:name="com.sortscript.publicworkdeveloper.ui.privacypolicy.PrivacyPolicyFragment"
+        android:label="@string/menu_privacypolicy"
+        tools:layout="@layout/fragment_privacy_policy" />
+
+    <fragment
+        android:id="@+id/nav_feedback"
+        android:name="com.sortscript.publicworkdeveloper.ui.feedback.FeedbackFragment"
+        android:label="@string/menu_feedback"
+        tools:layout="@layout/fragment_feedback" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/nav_changepassword"-->
+<!--        android:name="com.sortscript.publicworkdeveloper.ui.changepassword.ChangePasswordFragment"-->
+<!--        android:label="@string/menu_changepassword"-->
+<!--        tools:layout="@layout/fragment_change_password" />-->
+
+</navigation>
