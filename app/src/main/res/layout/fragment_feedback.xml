@@ -23,6 +23,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
+            android:src="@drawable/pwdlogo"
             />
 
     </LinearLayout>
@@ -43,7 +44,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Send your Feedback to Company"
-            android:textColor="@color/white"
+            android:textColor="@color/lightgrey"
             android:textSize="22sp" />
 
 
@@ -73,8 +74,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textMultiLine"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/lightgrey"
+                android:textColorHint="@color/lightgrey" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

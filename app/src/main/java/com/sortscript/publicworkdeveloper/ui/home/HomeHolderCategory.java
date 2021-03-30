@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sortscript.publicworkdeveloper.PostForWorker;
+import com.sortscript.publicworkdeveloper.Activities.PostForWorker;
 import com.sortscript.publicworkdeveloper.R;
 
 import androidx.annotation.NonNull;

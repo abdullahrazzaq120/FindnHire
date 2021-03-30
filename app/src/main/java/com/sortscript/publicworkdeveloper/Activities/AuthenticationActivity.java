@@ -1,8 +1,9 @@
-package com.sortscript.publicworkdeveloper;
+package com.sortscript.publicworkdeveloper.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -31,18 +32,27 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
+import com.sortscript.publicworkdeveloper.R;
+import com.sortscript.publicworkdeveloper.Worker.WorkerActivities.WorkerLoginActivity;
+import com.sortscript.publicworkdeveloper.Worker.WorkerActivities.WorkerMenu;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AuthenticationActivity extends AppCompatActivity {
 
-    Button facebookLoginBtn, googleLoginBtn;
+    Button facebookLoginBtn, googleLoginBtn, workerGoToLoginBtn;
     ProgressDialog loader;
     FirebaseAuth mAuth;
+    DatabaseReference reference;
     GoogleSignInClient mGoogleSignInClient;
     private static final int RC_SIGN_IN = 101;
     CountryCodePicker countryCodePicker;
@@ -68,12 +78,21 @@ public class AuthenticationActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
+        reference = FirebaseDatabase.getInstance().getReference().child("Members").child("Users");
         loader = new ProgressDialog(this);
         facebookLoginBtn = findViewById(R.id.facebookLoginBtnId);
         googleLoginBtn = findViewById(R.id.googleLoginBtnId);
         countryCodePicker = findViewById(R.id.countryCodeId);
         editText = findViewById(R.id.phoneId);
         next = findViewById(R.id.loginPhone);
+        workerGoToLoginBtn = findViewById(R.id.workerGoToLoginBtnId);
+
+        workerGoToLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AuthenticationActivity.this, WorkerLoginActivity.class));
+            }
+        });
 
         next.setOnClickListener(v -> {
 
@@ -174,65 +193,81 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onStart();
 
         try {
-            if (mAuth.getCurrentUser() != null) {
 
-//                //fb
-//                mAuth.addAuthStateListener(authStateListener);
-
-                Intent i = new Intent(AuthenticationActivity.this, UserMenu.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
+            for (UserInfo user : FirebaseAuth.getInstance().getCurrentUser().getProviderData()) {
+                if (user.getProviderId().equals("password")) {
+                    Intent i = new Intent(getApplicationContext(), WorkerMenu.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(getApplicationContext(), UserMenu.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(i);
+                }
             }
         } catch (Exception ignored) {
-
         }
+
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            final FirebaseUser user = mAuth.getCurrentUser();
-                            Log.e("unameemail", user.getEmail() + " " + user.getDisplayName());
 
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//
-//                                    Map<String, Object> map = new HashMap<>();
-//                                    map.put("UserName", user.getDisplayName());
-//                                    map.put("UserEmail", user.getEmail());
-//
-//                                    ref.child("Users").child(mAuth.getCurrentUser().getUid()).setValue(map)
-//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                @Override
-//                                                public void onComplete(@NonNull Task<Void> task) {
-//                                                    if (task.isSuccessful()) {
-                            updateUI(user);
-//                                                    } else {
-//                                                        loader.dismiss();
-//                                                        Toast.makeText(AuthenticationActivity.this, "Failed to Login", Toast.LENGTH_SHORT).show();
-//                                                    }
-//                                                }
-//                                            });
-//                                }
-//                            }, 2000);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(AuthenticationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
-                            Log.e("googleee", task.getException().toString());
-                            updateUI(null);
+        try {
+
+            loader.setTitle("Logging In with Google...");
+            loader.setCanceledOnTouchOutside(false);
+            loader.show();
+
+            AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+            mAuth.signInWithCredential(credential)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                final FirebaseUser user = mAuth.getCurrentUser();
+
+                                new Handler().postDelayed(() -> {
+
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.put("UserName", user.getDisplayName());
+                                    map.put("UserEmail", user.getEmail());
+                                    map.put("UserImage", user.getPhotoUrl().toString());
+                                    map.put("UserPhone", "");
+                                    map.put("UserCity", "");
+                                    map.put("UserAddress", "");
+                                    map.put("deviceToken", "");
+
+                                    reference.child(mAuth.getCurrentUser().getUid()).setValue(map)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task1) {
+                                                    if (task1.isSuccessful()) {
+                                                        loader.dismiss();
+                                                        updateUI(user);
+                                                    } else {
+                                                        loader.dismiss();
+                                                        Toast.makeText(AuthenticationActivity.this, "Failed to Login", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                }, 2000);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                loader.dismiss();
+                                Toast.makeText(AuthenticationActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
+                                Log.e("googleee", task.getException().toString());
+                                updateUI(null);
+                            }
                         }
-                    }
-                });
+                    });
+        } catch (Exception e) {
+            loader.dismiss();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void updateUI(FirebaseUser user) {
-        loader.dismiss();
         startActivity(new Intent(AuthenticationActivity.this, UserMenu.class));
         Toast.makeText(AuthenticationActivity.this, "User LogIn Successfully", Toast.LENGTH_LONG).show();
         finish();
@@ -277,58 +312,71 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     //fb
     private void handleFacebookAccessToken(AccessToken token) {
-        Log.e("handleFbAccessToken", token.toString());
 
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+        try {
 
-                            final FirebaseUser userFb = mAuth.getCurrentUser();
+            loader.setTitle("Logging In with Facebook...");
+            loader.setCanceledOnTouchOutside(false);
+            loader.show();
 
-//                            new Handler().postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//
-//                                    Map<String, Object> map = new HashMap<>();
-//                                    map.put("UserName", userFb.getDisplayName());
-//                                    map.put("UserEmail", userFb.getEmail());
-//
-//                                    ref.child("Users").child(userFb.getUid()).setValue(map)
-//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                @Override
-//                                                public void onComplete(@NonNull Task<Void> task) {
-//                                                    if (task.isSuccessful()) {
+            Log.e("handleFbAccessToken", token.toString());
 
-                            updateFacebookUI();
+            AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+            mAuth.signInWithCredential(credential)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
 
-                            Log.e("currentManName", userFb.getDisplayName());
-                            Log.e("currentManEmail", userFb.getEmail());
-                            Log.e("currentManId", userFb.getUid());
+                                final FirebaseUser userFb = mAuth.getCurrentUser();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
 
-//                                                    } else {
-//                                                        loader.dismiss();
-//                                                        Toast.makeText(AuthenticationActivity.this, "Failed to Login", Toast.LENGTH_SHORT).show();
-//                                                    }
-//                                                }
-//                                            });
-//                                }
-//                            }, 2000);
-                        } else {
+                                        Map<String, Object> map = new HashMap<>();
+                                        map.put("UserName", userFb.getDisplayName());
+                                        map.put("UserEmail", userFb.getEmail());
+                                        map.put("UserImage", userFb.getPhotoUrl().toString());
+                                        map.put("UserPhone", "");
+                                        map.put("UserCity", "");
+                                        map.put("UserAddress", "");
+                                        map.put("deviceToken", "");
 
-                            Toast.makeText(AuthenticationActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            Log.e("errorHere", task.getException().toString());
+                                        reference.child(mAuth.getCurrentUser().getUid()).setValue(map)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
 
+                                                            loader.dismiss();
+                                                            updateFacebookUI();
+                                                        } else {
+                                                            loader.dismiss();
+                                                            Toast.makeText(AuthenticationActivity.this, "Failed to Login", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                }, 2000);
+                            } else {
+
+                                loader.dismiss();
+                                Toast.makeText(AuthenticationActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                Log.e("errorHere", task.getException().toString());
+
+                            }
                         }
-                    }
-                });
+                    });
+        } catch (Exception e) {
+            loader.dismiss();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     //fb
     private void updateFacebookUI() {
         startActivity(new Intent(getApplicationContext(), UserMenu.class));
+        Toast.makeText(AuthenticationActivity.this, "User LogIn Successfully", Toast.LENGTH_LONG).show();
         finish();
     }
 }

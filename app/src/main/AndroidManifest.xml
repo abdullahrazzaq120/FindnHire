@@ -4,9 +4,11 @@
     package="com.sortscript.publicworkdeveloper">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
     <uses-feature
         android:name="android.hardware.camera2"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -15,28 +17,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PublicWorkDeveloper">
-        <activity android:name=".VerifyNumberActivity" />
-        <activity android:name=".AuthenticationActivity" />
+        <activity android:name=".Activities.ChatRoomActivity" />
+        <activity android:name=".ui.notification.OpenOfferNotifyWorkerProfileActivity" />
+        <activity android:name=".Worker.WorkerActivities.OpenClientRequestActivity" />
+        <activity android:name=".Worker.WorkerActivities.WorkerMenu" />
+        <activity android:name=".Worker.WorkerActivities.WorkerLoginActivity" />
+        <activity android:name=".Activities.VerifyNumberActivity" />
+        <activity android:name=".Activities.AuthenticationActivity" />
         <activity
-            android:name=".PostForWorker"
-            android:parentActivityName=".UserMenu"
+            android:name=".Activities.PostForWorker"
+            android:parentActivityName=".Activities.UserMenu"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserMenu"
+            android:name=".Activities.UserMenu"
             android:label="@string/title_activity_user_menu"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.PublicWorkDeveloper.NoActionBar" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".Activities.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- fb -->
+        </activity> <!-- fb -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"
@@ -58,6 +63,20 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+        <service android:name=".Services.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".Services.MyFirebaseMessagingService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

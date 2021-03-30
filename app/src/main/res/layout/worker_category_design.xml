@@ -10,6 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="10dp"
+        android:animationCache="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:stateListAnimator="@anim/card_animation"
         app:cardBackgroundColor="@color/lightwhite"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp">
@@ -31,11 +35,11 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="Work Name"
         android:textColor="@color/darkblue"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 
 </LinearLayout>

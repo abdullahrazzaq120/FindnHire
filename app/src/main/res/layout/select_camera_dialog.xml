@@ -42,9 +42,8 @@
                         android:id="@+id/make_video_id"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:backgroundTint="@color/white"
                         android:scaleType="fitXY"
-                        />
+                        android:src="@drawable/ic_baseline_videocam_24" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -80,9 +79,8 @@
                         android:id="@+id/select_video_id"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:backgroundTint="@color/white"
                         android:scaleType="fitXY"
-                        />
+                        android:src="@drawable/ic_baseline_video_library_24" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -93,7 +91,7 @@
                     android:layout_gravity="center"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center"
-                    android:text="Download "
+                    android:text="Internal "
                     android:textColor="#000"
                     android:textSize="17sp" />
 

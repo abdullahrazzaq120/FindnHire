@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HomeAdapterCategory extends RecyclerView.Adapter<HomeHolderCategory>{
+public class HomeAdapterCategory extends RecyclerView.Adapter<HomeHolderCategory> {
     Context c;
     ArrayList<HomeModelCategory> models;
 
@@ -31,8 +31,14 @@ public class HomeAdapterCategory extends RecyclerView.Adapter<HomeHolderCategory
     @Override
     public void onBindViewHolder(@NonNull HomeHolderCategory holder, int position) {
 
-        holder.mTextViewCategory.setText(models.get(position).getWorker_title_category());
-        holder.mImageViewCategory.setImageResource(models.get(position).getWorker_image_category());
+        try {
+
+            holder.mTextViewCategory.setText(models.get(position).getWorker_title_category());
+            holder.mImageViewCategory.setImageResource(models.get(position).getWorker_image_category());
+
+        } catch (Exception ignored) {
+
+        }
     }
 
     @Override

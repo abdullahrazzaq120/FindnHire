@@ -11,11 +11,12 @@ import com.sortscript.publicworkdeveloper.R;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class FragmentServicesAvailed extends Fragment {
 
     View v;
-    Button contact;
+    RecyclerView serviceAvailedRv;
 
     public FragmentServicesAvailed() {
     }
@@ -25,6 +26,7 @@ public class FragmentServicesAvailed extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.services_availed_post_fragment, container, false);
 
+        serviceAvailedRv = v.findViewById(R.id.rv_service_availed_id);
         return v;
     }
 }

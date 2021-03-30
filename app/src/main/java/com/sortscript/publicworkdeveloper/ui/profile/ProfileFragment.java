@@ -59,7 +59,6 @@ public class ProfileFragment extends Fragment {
     private static final String USER_CITY = "UserCity";
     private static final String USER_ADDRESS = "UserAddress";
     private static final String USER_IMAGE = "UserImage";
-    String checka;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -125,33 +124,26 @@ public class ProfileFragment extends Fragment {
 
         try {
 
-            mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            mRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        if (dataSnapshot.exists()) {
-                            String a = dataSnapshot.getKey();
-                            Log.e("datas", a);
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            if (a.contains(user)) {
+                    try {
+                        String nameO = dataSnapshot.child(USER_NAME).getValue(String.class);
+                        String emailO = dataSnapshot.child(USER_EMAIL).getValue(String.class);
+                        String phoneO = dataSnapshot.child(USER_PHONE).getValue(String.class);
+                        String cityO = dataSnapshot.child(USER_CITY).getValue(String.class);
+                        String addressO = dataSnapshot.child(USER_ADDRESS).getValue(String.class);
+                        String imageO = dataSnapshot.child(USER_IMAGE).getValue(String.class);
 
-                                Log.e("dasaklalm", a);
+                        fprofileUName.setText(nameO);
+                        fprofileEmail.setText(emailO);
+                        fprofilePhone.setText(phoneO);
+                        fprofileCity.setText(cityO);
+                        fprofileAddress.setText(addressO);
+                        Glide.with(getActivity()).load(imageO).into(fprofileImage);
 
-                                String nameO = dataSnapshot.child(USER_NAME).getValue(String.class);
-                                String emailO = dataSnapshot.child(USER_EMAIL).getValue(String.class);
-                                String phoneO = dataSnapshot.child(USER_PHONE).getValue(String.class);
-                                String cityO = dataSnapshot.child(USER_CITY).getValue(String.class);
-                                String addressO = dataSnapshot.child(USER_ADDRESS).getValue(String.class);
-                                String imageO = dataSnapshot.child(USER_IMAGE).getValue(String.class);
-
-                                fprofileUName.setText(nameO);
-                                fprofileEmail.setText(emailO);
-                                fprofilePhone.setText(phoneO);
-                                fprofileCity.setText(cityO);
-                                fprofileAddress.setText(addressO);
-                                Glide.with(getActivity()).load(imageO).into(fprofileImage);
-                            }
-                        }
+                    } catch (Exception ignored) {
                     }
                 }
 
@@ -167,66 +159,17 @@ public class ProfileFragment extends Fragment {
 
     private void saveDataFunction(String uName, String uEmail, String uPhone, String uCity, String uAddress) {
 
-        loader2.setTitle("Setting Profile...");
-        loader2.setCanceledOnTouchOutside(false);
-        loader2.show();
-
-        mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    checka = dataSnapshot.getKey();
-                    Log.e("datasAgain", checka);
-
-                    if (checka.contains(user)) {
-
-                        try {
-                            Log.e("secondtime", "2nd Time");
-                            notTheFirstTimeFunction(uName, uEmail, uPhone, uCity, uAddress);
-                        } catch (Exception e) {
-                            Log.e("secondtimeerror", e.getMessage() + "2nd");
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                            loader2.dismiss();
-                        }
-                    } else {
-                        try {
-                            Log.e("firsttime", "1st Time");
-                            firstTimeFunction(uName, uEmail, uPhone, uCity, uAddress);
-                        } catch (Exception e) {
-                            Log.e("firsttimerror", e.getMessage() + "1st");
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                            loader2.dismiss();
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+        notTheFirstTimeFunction(uName, uEmail, uPhone, uCity, uAddress);
     }
 
     private void notTheFirstTimeFunction(String uName, String uEmail, String uPhone, String uCity, String uAddress) {
 
-        if (mImageUri == null) {
-            if (uName.isEmpty()) {
-                loader2.dismiss();
-                fprofileUName.setError("Username required!");
-            } else if (uPhone.isEmpty()) {
-                loader2.dismiss();
-                fprofilePhone.setError("Phone Number required!");
-            } else if (uCity.isEmpty()) {
-                loader2.dismiss();
-                fprofileCity.setError("City Name required!");
-            } else if (uAddress.isEmpty()) {
-                loader2.dismiss();
-                fprofileAddress.setError("Address required!");
-            } else {
+        try {
+            loader2.setTitle("Setting Profile...");
+            loader2.setCanceledOnTouchOutside(false);
+            loader2.show();
 
+            if (mImageUri == null) {
                 Map<String, Object> map = new HashMap<>();
                 map.put(USER_NAME, uName);
                 map.put(USER_EMAIL, uEmail);
@@ -250,25 +193,13 @@ public class ProfileFragment extends Fragment {
                                 Toast.makeText(getActivity(), task1.toString(), Toast.LENGTH_SHORT).show();
                             }
                         });
-            }
-        } else {
-            if (uName.isEmpty()) {
-                loader2.dismiss();
-                fprofileUName.setError("Username required!");
-            } else if (uPhone.isEmpty()) {
-                loader2.dismiss();
-                fprofilePhone.setError("Phone Number required!");
-            } else if (uCity.isEmpty()) {
-                loader2.dismiss();
-                fprofileCity.setError("City Name required!");
-            } else if (uAddress.isEmpty()) {
-                loader2.dismiss();
-                fprofileAddress.setError("Address required!");
             } else {
+
                 StorageReference fileReference = mStorageRef.child(mAuth.getCurrentUser().getUid() + "." + getFileExtension(mImageUri));
                 fileReference.putFile(mImageUri).addOnSuccessListener(taskSnapshot -> {
                     Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
                     task.addOnSuccessListener(uri -> {
+
                         String imageLink = uri.toString();
 
                         Map<String, Object> map = new HashMap<>();
@@ -298,59 +229,9 @@ public class ProfileFragment extends Fragment {
                     });
                 });
             }
-        }
-    }
-
-    private void firstTimeFunction(String uName, String uEmail, String uPhone, String uCity, String uAddress) {
-
-        if (mImageUri == null) {
+        } catch (Exception e) {
             loader2.dismiss();
-            Toast.makeText(getActivity(), "Image", Toast.LENGTH_SHORT).show();
-        } else if (uName.isEmpty()) {
-            loader2.dismiss();
-            fprofileUName.setError("Username required!");
-        } else if (uPhone.isEmpty()) {
-            loader2.dismiss();
-            fprofilePhone.setError("Phone Number required!");
-        } else if (uCity.isEmpty()) {
-            loader2.dismiss();
-            fprofileCity.setError("City Name required!");
-        } else if (uAddress.isEmpty()) {
-            loader2.dismiss();
-            fprofileAddress.setError("Address required!");
-        } else {
-            StorageReference fileReference = mStorageRef.child(mAuth.getCurrentUser().getUid() + "." + getFileExtension(mImageUri));
-            fileReference.putFile(mImageUri).addOnSuccessListener(taskSnapshot -> {
-                Task<Uri> task = taskSnapshot.getMetadata().getReference().getDownloadUrl();
-                task.addOnSuccessListener(uri -> {
-                    String imageLink = uri.toString();
-
-                    Map<String, Object> map = new HashMap<>();
-                    map.put(USER_IMAGE, imageLink);
-                    map.put(USER_NAME, uName);
-                    map.put(USER_EMAIL, uEmail);
-                    map.put(USER_PHONE, uPhone);
-                    map.put(USER_CITY, uCity);
-                    map.put(USER_ADDRESS, uAddress);
-
-                    mRef.child(mAuth.getCurrentUser().getUid()).setValue(map)
-                            .addOnCompleteListener(task1 -> {
-                                if (task1.isSuccessful()) {
-                                    try {
-                                        loader2.dismiss();
-                                        Toast.makeText(getActivity(), "Data Saved!", Toast.LENGTH_SHORT).show();
-                                        makeFieldsEnableFalse();
-                                        Log.e("checkStatusForAl", "1sttimewithuri");
-                                    } catch (Exception ignored) {
-
-                                    }
-                                } else {
-                                    loader2.dismiss();
-                                    Toast.makeText(getActivity(), task1.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                });
-            });
+            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -6,14 +6,14 @@
     android:background="@color/darkblue"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".VerifyNumberActivity">
+    tools:context=".Activities.VerifyNumberActivity">
 
     <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
-        />
+        android:src="@drawable/pwdlogo" />
 
 
     <TextView
@@ -26,12 +26,13 @@
 
     <EditText
         android:id="@+id/editcode"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:hint="OPT Here!"
         android:inputType="phone"
+        android:maxLength="6"
         android:textAlignment="center"
         android:textColor="@color/lightgrey"
         android:textColorHint="@color/lightgrey" />

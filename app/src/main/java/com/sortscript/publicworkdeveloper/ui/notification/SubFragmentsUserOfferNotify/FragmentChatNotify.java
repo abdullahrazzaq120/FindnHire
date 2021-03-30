@@ -1,4 +1,4 @@
-package com.sortscript.publicworkdeveloper.ui.notification;
+package com.sortscript.publicworkdeveloper.ui.notification.SubFragmentsUserOfferNotify;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,19 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class FragmentOffersNotify extends Fragment {
+
+public class FragmentChatNotify extends Fragment {
 
     View v;
-    Button contact;
+    Button call;
 
-    public FragmentOffersNotify() {
+    public FragmentChatNotify() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.offers_notify_post_fragment, container, false);
+        v = inflater.inflate(R.layout.chat_notify_post_fragment, container, false);
 
         return v;
+
     }
+
+
 }

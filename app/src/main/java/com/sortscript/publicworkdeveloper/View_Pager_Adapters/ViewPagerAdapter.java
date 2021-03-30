@@ -1,4 +1,4 @@
-package com.sortscript.publicworkdeveloper.Adapters;
+package com.sortscript.publicworkdeveloper.View_Pager_Adapters;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
+public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private final List<Fragment> firstFragment= new ArrayList<>();
     private final List<String> firstTitles= new ArrayList<>();

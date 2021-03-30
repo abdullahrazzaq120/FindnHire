@@ -6,9 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
-import com.sortscript.publicworkdeveloper.Adapters.ViewPagerAdapter;
+import com.sortscript.publicworkdeveloper.View_Pager_Adapters.ViewPagerAdapter;
 import com.sortscript.publicworkdeveloper.R;
-import com.sortscript.publicworkdeveloper.ui.notification.NotificationViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

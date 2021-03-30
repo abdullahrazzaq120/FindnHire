@@ -22,7 +22,9 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:background="@drawable/ic_baseline_account_circle_24" />
+            android:background="@drawable/ic_baseline_account_circle_24"
+            app:civ_border="false"
+            app:civ_shadow="false" />
 
     </LinearLayout>
 
@@ -33,7 +35,8 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -46,7 +49,6 @@
             android:hint="username"
             app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
 
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fprofileUNameId"
                 android:layout_width="match_parent"
@@ -55,9 +57,16 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:text="(required)"
+            android:textColor="#ff0000"
+            android:textSize="14dp" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -127,7 +136,8 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -149,6 +159,15 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:text="(required)"
+            android:textColor="#ff0000"
+            android:textSize="14dp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -157,7 +176,8 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -167,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:enabled="false"
-            android:hint="Address"
+            android:hint="Area Name"
             app:startIconDrawable="@drawable/ic_baseline_edit_location_24">
 
 
@@ -179,6 +199,14 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:text="(required)"
+            android:textColor="#ff0000"
+            android:textSize="14dp" />
 
     </LinearLayout>
 
@@ -201,7 +229,6 @@
             android:layout_weight="1"
             android:gravity="center">
 
-
             <Button
                 android:id="@+id/fprofileEditBtnId"
                 android:layout_width="match_parent"
@@ -213,7 +240,6 @@
                 android:text="Edit"
                 android:textColor="@color/lightwhite" />
 
-
         </LinearLayout>
 
 
@@ -224,7 +250,6 @@
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="center">
-
 
             <Button
                 android:id="@+id/fprofileSaveBtnId"
@@ -238,12 +263,9 @@
                 android:text="Save"
                 android:textColor="@color/lightwhite" />
 
-
         </LinearLayout>
 
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -252,6 +274,5 @@
         android:layout_margin="5dp"
         android:layout_weight="0.2"
         android:gravity="center" />
-
 
 </LinearLayout>

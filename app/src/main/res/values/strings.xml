@@ -19,6 +19,6 @@
 
     <string name="facebook_app_id">190621362744963</string>
     <string name="fb_login_protocol_scheme">fb190621362744963</string>
-
+    <string name="firebase_server_key">AAAAATrLNGs:APA91bGVZTBjHFi4qZrhXwiFMrWGAZ_hL8b2SvoBmE6A03Z2adehQtRXXKrrVGtNvsehkRPGy-zPZ2gC3TnRVYAELihtxe750-j59erzMpYQb8Qf5fG_uchhcp69O-M0RTS6EwekMmVh</string>
 
 </resources>

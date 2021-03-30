@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Worker.WorkerActivities.OpenClientRequestActivity">
+
+    <TextView
+        android:id="@+id/openRequestNameId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:hint="Client Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black" />
+
+    <ScrollView
+        android:id="@+id/asds"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/openRequestNameId"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/openRequestDescriptionId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Client Description"
+            android:paddingBottom="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </ScrollView>
+
+    <VideoView
+        android:id="@+id/openRequestVideoId"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/asds"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp" />
+
+    <Button
+        android:id="@+id/openRequestSendOfferBtnId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#2DA103"
+        android:text="Send Offer"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

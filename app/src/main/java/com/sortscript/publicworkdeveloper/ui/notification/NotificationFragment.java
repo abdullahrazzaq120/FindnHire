@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
-import com.sortscript.publicworkdeveloper.Adapters.ViewPagerAdapter;
+import com.sortscript.publicworkdeveloper.View_Pager_Adapters.ViewPagerAdapter;
 import com.sortscript.publicworkdeveloper.R;
-import com.sortscript.publicworkdeveloper.ui.post.FragmentCurrentService;
-import com.sortscript.publicworkdeveloper.ui.post.FragmentServicesAvailed;
+import com.sortscript.publicworkdeveloper.ui.notification.SubFragmentsUserOfferNotify.FragmentChatNotify;
+import com.sortscript.publicworkdeveloper.ui.notification.SubFragmentsUserOfferNotify.FragmentOffersNotify;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,8 +33,8 @@ public class NotificationFragment extends Fragment {
         adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
         //add fragment here
-        adapter.AddFragment(new FragmentChatNotify(), "Chats");
         adapter.AddFragment(new FragmentOffersNotify(), "Offers");
+        adapter.AddFragment(new FragmentChatNotify(), "Chats");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

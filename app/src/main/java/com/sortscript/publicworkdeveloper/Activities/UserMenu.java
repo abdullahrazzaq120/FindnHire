@@ -1,17 +1,15 @@
-package com.sortscript.publicworkdeveloper;
+package com.sortscript.publicworkdeveloper.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.widget.ImageView;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -19,17 +17,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.sortscript.publicworkdeveloper.R;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 public class UserMenu extends AppCompatActivity {
 
@@ -82,9 +82,36 @@ public class UserMenu extends AppCompatActivity {
 
 
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(menuItem -> {
-            mAuth.signOut();
-            startActivity(new Intent(UserMenu.this, AuthenticationActivity.class));
-            finish();
+
+            AlertDialog alertDialog;
+            AlertDialog.Builder dialog = new AlertDialog.Builder(UserMenu.this);
+            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View v2 = inflater.inflate(R.layout.logout_dialog, null);
+            dialog.setView(v2);
+            alertDialog = dialog.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            alertDialog.show();
+
+            TextView tv1 = v2.findViewById(R.id.yesLogoutBtnId);
+            TextView tv2 = v2.findViewById(R.id.cancelLogoutBtnId);
+
+            tv1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mAuth.signOut();
+                    startActivity(new Intent(UserMenu.this, AuthenticationActivity.class));
+                    finish();
+                    alertDialog.dismiss();
+                }
+            });
+
+            tv2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+
             return true;
         });
 
@@ -113,5 +140,11 @@ public class UserMenu extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        String tkn = FirebaseInstanceId.getInstance().getToken();
+        reference.child(mAuth.getCurrentUser().getUid()).child("deviceToken").setValue(tkn);
+    }
 }

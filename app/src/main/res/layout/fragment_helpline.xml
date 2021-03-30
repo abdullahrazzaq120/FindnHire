@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkblue"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".ui.helpline.HelplineFragment">
@@ -22,7 +23,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            />
+            android:src="@drawable/pwdlogo" />
 
     </LinearLayout>
 
@@ -48,7 +49,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="false" />
+                android:clickable="false"
+                android:textColor="@color/lightgrey"
+                android:textColorHint="@color/lightgrey" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,7 +80,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="false" />
+                android:clickable="false"
+                android:textColor="@color/lightgrey"
+                android:textColorHint="@color/lightgrey" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,7 +110,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="false" />
+                android:clickable="false"
+                android:textColor="@color/lightgrey"
+                android:textColorHint="@color/lightgrey" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,9 +143,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-
             android:gravity="center"
-            />
+            android:src="@drawable/ic_baseline_local_post_office_24" />
 
 
     </LinearLayout>
