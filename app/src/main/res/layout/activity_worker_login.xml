@@ -25,50 +25,82 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="Worker Email"
+        android:hint="Worker Name"
         android:textColorHint="@color/lightgrey"
-        app:startIconDrawable="@drawable/ic_baseline_email_24">
+        app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
+        app:startIconTint="@color/white">
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/workerEmailId"
+            android:id="@+id/workerNameId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             android:textColor="@color/white"
             android:textColorHint="@color/lightgrey" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:hint="Worker Password"
-        android:textColorHint="@color/lightgrey"
-        app:startIconDrawable="@drawable/ic_baseline_lock_24">
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/countryCodeId"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:textColor="@color/lightgrey"
+            app:ccpDialog_backgroundColor="@color/lightgrey"
+            app:ccpDialog_keyboardAutoPopup="true"
+            app:ccpDialog_textColor="@color/darkblue"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_autoDetectLanguage="true"
+            app:ccp_autoFormatNumber="true"
+            app:ccp_contentColor="@color/lightgrey" />
 
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/workerPasswordId"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="@color/white"
-            android:textColorHint="@color/lightgrey" />
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:hint="Phone Number"
+            android:textColor="@color/lightgrey"
+            android:textColorHint="@color/lightgrey"
+            app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
+            app:startIconTint="@color/white">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/workerPhoneId"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="phone"
+                android:textColor="@color/lightgrey"
+                android:textColorHint="@color/lightgrey" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/workerLoginBtnId"
+        android:id="@+id/workerNextBtnId"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_margin="10dp"
         android:background="@drawable/btn_style_for_profile"
+        android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+        android:drawableTint="@color/white"
         android:gravity="center"
-        android:text="Login"
+        android:text="Next"
         android:textColor="@color/lightwhite" />
 
 </LinearLayout>

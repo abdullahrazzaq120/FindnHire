@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "5281363051",
-    "project_id": "publicworkdeveloper-c9e1a",
-    "storage_bucket": "publicworkdeveloper-c9e1a.appspot.com"
+    "project_number": "729082600999",
+    "project_id": "findnhire",
+    "storage_bucket": "findnhire.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:5281363051:android:82538022b45ac54e37ad2e",
+        "mobilesdk_app_id": "1:729082600999:android:ac983e376a4625cc7a7802",
         "android_client_info": {
-          "package_name": "com.sortscript.publicworkdeveloper"
+          "package_name": "com.sortscript.findnhire"
         }
       },
       "oauth_client": [
         {
-          "client_id": "5281363051-tcdkp7g229qbvtp90p2qmtergo1mlcnt.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sortscript.publicworkdeveloper",
-            "certificate_hash": "17b86214b8f41c4af137c733a18b6d30c4ffad24"
-          }
-        },
-        {
-          "client_id": "5281363051-fuaurlv5igkl2i4ml6ghsda783ekpj0q.apps.googleusercontent.com",
+          "client_id": "729082600999-8i97akse03q26br2bmtjq9ni0qqr76b5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAziDPAv8iX1lh-hafihTKQ9UD0andgm3Y"
+          "current_key": "AIzaSyCP-QTgP6SDuXsX90gHg7uKmZctl4EgPuQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "5281363051-fuaurlv5igkl2i4ml6ghsda783ekpj0q.apps.googleusercontent.com",
+              "client_id": "729082600999-8i97akse03q26br2bmtjq9ni0qqr76b5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

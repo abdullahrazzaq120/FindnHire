@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.PublicWorkDeveloper" parent="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge">
+    <style name="Theme.FindnHire" parent="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -14,14 +14,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.PublicWorkDeveloper.NoActionBar">
+    <style name="Theme.FindnHire.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.PublicWorkDeveloper.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.FindnHire.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.PublicWorkDeveloper.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.FindnHire.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="CustomDialogTheme">
         <item name="android:gravity">center</item>

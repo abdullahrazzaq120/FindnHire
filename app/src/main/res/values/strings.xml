@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Public Work Developer</string>
+    <string name="app_name">Find n Hire</string>
     <string name="title_activity_user_menu">UserMenu</string>
     <string name="nav_header_title">Username</string>
     <string name="nav_header_subtitle">Mobile</string>
@@ -17,8 +17,12 @@
     <string name="menu_privacypolicy">Privacy Policy</string>
     <string name="menu_logout">Logout</string>
 
-    <string name="facebook_app_id">190621362744963</string>
-    <string name="fb_login_protocol_scheme">fb190621362744963</string>
-    <string name="firebase_server_key">AAAAATrLNGs:APA91bGVZTBjHFi4qZrhXwiFMrWGAZ_hL8b2SvoBmE6A03Z2adehQtRXXKrrVGtNvsehkRPGy-zPZ2gC3TnRVYAELihtxe750-j59erzMpYQb8Qf5fG_uchhcp69O-M0RTS6EwekMmVh</string>
+    <string-array name="genders">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="firebase_server_key">AAAAqcC1nic:APA91bHI3BPlGWsb3-FMTaASbbxN0S2D31sYKw9eTbnlvmNM51NoFACFxkGRdOwu9PGbKsOnGrNrXDyDKot9MMj63SxoG7QzXsx7AI-o7Td-goKJOZbTlofrWr-ZmqmkFOi4V7P72Mt6</string>
 
 </resources>

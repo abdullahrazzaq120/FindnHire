@@ -9,39 +9,121 @@
     tools:context=".Activities.VerifyNumberActivity">
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
         android:src="@drawable/pwdlogo" />
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the code sent to your number"
+        android:text="Enter OTP sent to your number"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/lightgrey" />
 
-    <EditText
-        android:id="@+id/editcode"
-        android:layout_width="150dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:hint="OPT Here!"
-        android:inputType="phone"
-        android:maxLength="6"
-        android:textAlignment="center"
-        android:textColor="@color/lightgrey"
-        android:textColorHint="@color/lightgrey" />
+        android:layout_margin="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <EditText
+            android:id="@+id/editcode1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border2"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="phone"
+            android:maxLength="1"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/editcode2"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border2"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="phone"
+            android:maxLength="1"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/editcode3"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border2"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="phone"
+            android:maxLength="1"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/editcode4"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border2"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="phone"
+            android:maxLength="1"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/editcode5"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border2"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="phone"
+            android:maxLength="1"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/editcode6"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/border2"
+            android:cursorVisible="false"
+            android:gravity="center"
+            android:inputType="phone"
+            android:maxLength="1"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/otp_incorrect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp"
         android:text="Wrong OTP"
         android:textColor="@color/lightgrey"
         android:textSize="12dp"

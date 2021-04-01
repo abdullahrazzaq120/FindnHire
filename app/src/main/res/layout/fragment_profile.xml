@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10"
+    android:weightSum="8"
     tools:context=".ui.profile.ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:layout_weight="2.8"
+        android:layout_weight="2"
         android:gravity="center">
 
         <com.mikhaellopez.circularimageview.CircularImageView
@@ -28,10 +28,9 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:layout_weight="1"
@@ -43,8 +42,7 @@
             android:id="@+id/p1id"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
             android:enabled="false"
             android:hint="username"
             app:startIconDrawable="@drawable/ic_baseline_account_circle_24">
@@ -52,41 +50,30 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fprofileUNameId"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textPersonName" />
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:gravity="end"
-            android:text="(required)"
-            android:textColor="#ff0000"
-            android:textSize="14dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:gravity="center">
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/p2id"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:enabled="false"
             android:hint="Email"
             app:startIconDrawable="@drawable/ic_baseline_local_post_office_24">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fprofileEmailId"
@@ -98,10 +85,9 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:layout_weight="1"
@@ -112,7 +98,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:enabled="false"
             android:hint="Phone"
             app:startIconDrawable="@drawable/ic_baseline_phone_android_24">
@@ -129,65 +114,22 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/p4id"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:enabled="false"
-            android:hint="City"
-            app:startIconDrawable="@drawable/ic_baseline_location_city_24">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fprofileCityId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPostalAddress" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:gravity="end"
-            android:text="(required)"
-            android:textColor="#ff0000"
-            android:textSize="14dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/p5id"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:enabled="false"
-            android:hint="Area Name"
+            android:hint="Address"
             app:startIconDrawable="@drawable/ic_baseline_edit_location_24">
 
 
@@ -199,27 +141,16 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:gravity="end"
-            android:text="(required)"
-            android:textColor="#ff0000"
-            android:textSize="14dp" />
-
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:layout_weight="2"
         android:gravity="center"
         android:weightSum="2">
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -241,7 +172,6 @@
                 android:textColor="@color/lightwhite" />
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -266,13 +196,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:layout_weight="0.2"
-        android:gravity="center" />
 
 </LinearLayout>
