@@ -16,24 +16,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FindnHire">
-        <activity android:name="com.sortscript.findnhire.Activities.ChatRoomActivity" />
-        <activity android:name="com.sortscript.findnhire.ui.notification.OpenOfferNotifyWorkerProfileActivity" />
-        <activity android:name="com.sortscript.findnhire.Worker.WorkerActivities.OpenClientRequestActivity" />
-        <activity android:name="com.sortscript.findnhire.Worker.WorkerActivities.WorkerMenu" />
-        <activity android:name="com.sortscript.findnhire.Worker.WorkerActivities.WorkerLoginActivity" />
-        <activity android:name="com.sortscript.findnhire.Activities.VerifyNumberActivity" />
-        <activity android:name="com.sortscript.findnhire.Activities.AuthenticationActivity" />
         <activity
-            android:name="com.sortscript.findnhire.Activities.PostForWorker"
-            android:parentActivityName="com.sortscript.findnhire.Activities.UserMenu"
+            android:name=".Activities.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.sortscript.findnhire.Activities.UserMenu"
+            android:name=".Activities.ChatRoomActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.notification.OpenOfferNotifyWorkerProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Worker.WorkerActivities.OpenClientRequestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Worker.WorkerActivities.WorkerMenu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Worker.WorkerActivities.WorkerLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.VerifyNumberActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.AuthenticationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.PostForWorker"
+            android:parentActivityName=".Activities.UserMenu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.UserMenu"
             android:label="@string/title_activity_user_menu"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.FindnHire.NoActionBar" />
         <activity
-            android:name="com.sortscript.findnhire.Activities.SplashActivity"
+            android:name=".Activities.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,14 +58,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- fb -->
-
-        <service android:name="com.sortscript.findnhire.Services.MyFirebaseInstanceIDService">
+        <service android:name=".Services.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service
-            android:name="com.sortscript.findnhire.Services.MyFirebaseMessagingService"
+            android:name=".Services.MyFirebaseMessagingService"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

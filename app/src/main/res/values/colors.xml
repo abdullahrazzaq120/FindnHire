@@ -11,5 +11,6 @@
     <color name="skyblue">#ECECEC</color>
     <color name="lightblue">#3CBBBFCA</color>
     <color name="darkblue">#495464</color>
+    <color name="lightblue2">#ACB1BA</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

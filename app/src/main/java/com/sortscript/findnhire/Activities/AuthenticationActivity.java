@@ -3,7 +3,6 @@ package com.sortscript.findnhire.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -23,6 +22,9 @@ import com.sortscript.findnhire.Classes.FirebaseAuthClass;
 import com.sortscript.findnhire.R;
 import com.sortscript.findnhire.Worker.WorkerActivities.WorkerLoginActivity;
 import com.sortscript.findnhire.Worker.WorkerActivities.WorkerMenu;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -106,9 +108,15 @@ public class AuthenticationActivity extends AppCompatActivity {
             if (emailSI.isEmpty()) {
                 loader.dismiss();
                 emailSignIn.setError("Email Required!");
+                emailSignIn.requestFocus();
+            } else if (!validEmail(emailSI)) {
+                loader.dismiss();
+                emailSignIn.setError("Invalid Email!");
+                emailSignIn.requestFocus();
             } else if (passwordSI.isEmpty()) {
                 loader.dismiss();
                 passwordSignIn.setError("Password Required!");
+                passwordSignIn.requestFocus();
             } else {
                 firebaseAuthClass.signIn(emailSI, passwordSI);
             }
@@ -221,38 +229,75 @@ public class AuthenticationActivity extends AppCompatActivity {
         if (userNameSU.isEmpty()) {
             loader2.dismiss();
             userNameSignUpEt.setError("Username Required!");
+            userNameSignUpEt.requestFocus();
         } else if (emailSU.isEmpty()) {
             loader2.dismiss();
             userEmailSignUpEt.setError("Email Required!");
+            userEmailSignUpEt.requestFocus();
+        } else if (!validEmail(emailSU)) {
+            loader2.dismiss();
+            userEmailSignUpEt.setError("Invalid Email!");
+            userEmailSignUpEt.requestFocus();
         } else if (passwordSU.isEmpty()) {
             loader2.dismiss();
             userPasswordSignUpEt.setError("Password Required!");
+            userPasswordSignUpEt.requestFocus();
+        } else if (passwordSU.length() < 8) {
+            loader2.dismiss();
+            userPasswordSignUpEt.setError("Password must contains 8 characters!");
+            userPasswordSignUpEt.requestFocus();
+        } else if (!validPassword(passwordSU)) {
+            loader2.dismiss();
+            userPasswordSignUpEt.setError("1 uppercase, 1 special character and 1 lowercase required!");
+            userPasswordSignUpEt.requestFocus();
         } else if (cPasswordSU.isEmpty()) {
             loader2.dismiss();
             userCPasswordSignUpEt.setError("Confirm Password Required!");
+            userCPasswordSignUpEt.requestFocus();
         } else if (!passwordSU.equals(cPasswordSU)) {
             loader2.dismiss();
             userCPasswordSignUpEt.setError("Password don't match!");
+            userCPasswordSignUpEt.requestFocus();
         } else if (addressSU.isEmpty()) {
             loader2.dismiss();
             userAddressSignUpEt.setError("Address Required!");
+            userAddressSignUpEt.requestFocus();
         } else if (dayOB.isEmpty()) {
             loader2.dismiss();
             Toast.makeText(this, "Enter Correct Date!", Toast.LENGTH_SHORT).show();
+            userDaySignUpEt.requestFocus();
         } else if (monthOB.isEmpty()) {
             loader2.dismiss();
             Toast.makeText(this, "Enter Correct Date!", Toast.LENGTH_SHORT).show();
+            userMonthSignUpEt.requestFocus();
         } else if (yearOB.isEmpty()) {
             loader2.dismiss();
             Toast.makeText(this, "Enter Correct Date!", Toast.LENGTH_SHORT).show();
+            userYearSignUpEt.requestFocus();
         } else if (!userCheckedCb.isChecked()) {
             loader2.dismiss();
             Toast.makeText(this, "Check the Terms & Condition", Toast.LENGTH_SHORT).show();
+            userCheckedCb.requestFocus();
         } else {
             String dob = dayOB + "-" + monthOB + "-" + yearOB;
             firebaseAuthClass = new FirebaseAuthClass(getApplicationContext(), loader);
             firebaseAuthClass.signUp(userNameSU, emailSU, passwordSU, addressSU, dob, genderLink);
         }
+    }
+
+    private boolean validEmail(String emailSU) {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        return emailSU.matches(emailPattern);
+    }
+
+    private boolean validPassword(String passwordSU) {
+        Pattern pattern;
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[_@#$%^&+=!])(?=\\S+$).{4,}$";
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(passwordSU);
+
+        return matcher.matches();
     }
 
     @Override

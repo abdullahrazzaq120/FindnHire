@@ -20,13 +20,12 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.sortscript.findnhire.Activities.ModelSetUsers;
+import com.sortscript.findnhire.Classes.DatabaseRefs;
 import com.sortscript.findnhire.R;
 
 import java.util.HashMap;
@@ -50,10 +49,9 @@ public class ProfileFragment extends Fragment {
     StorageReference mStorageRef;
     ProgressDialog loader2;
     FirebaseAuth mAuth;
-    String user;
-    DatabaseReference mRef;
     ModelSetUsers modelSetUsers;
     private static final String TAG = "ProfileFragment";
+    DatabaseRefs databaseRefs;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -61,11 +59,10 @@ public class ProfileFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser().getUid();
-        mRef = FirebaseDatabase.getInstance().getReference().child("Members").child("Users");
         mStorageRef = FirebaseStorage.getInstance().getReference().child("Members").child("Users");
         loader2 = new ProgressDialog(getActivity(), R.style.CustomDialogTheme);
         modelSetUsers = new ModelSetUsers();
+        databaseRefs = new DatabaseRefs();
 
         getReferenceIds(root);
 
@@ -75,7 +72,10 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        fprofileEditBtn.setOnClickListener(view -> makeFieldsEnableTrue());
+        fprofileEditBtn.setOnClickListener(view -> {
+            setManageFields(true);
+//            makeFieldsEnableTrue();
+        });
 
         fprofileSaveBtn.setOnClickListener(view -> {
             getUserDetails();
@@ -132,34 +132,35 @@ public class ProfileFragment extends Fragment {
 
         try {
 
-            mRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            databaseRefs.referenceUIDUsers
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    if (dataSnapshot.exists()) {
-                        try {
-                            String nameO = dataSnapshot.child("userName").getValue(String.class);
-                            String emailO = dataSnapshot.child("userEmail").getValue(String.class);
-                            String phoneO = dataSnapshot.child("userPhone").getValue(String.class);
-                            String addressO = dataSnapshot.child("userAddress").getValue(String.class);
-                            String imageO = dataSnapshot.child("userImage").getValue(String.class);
+                            if (dataSnapshot.exists()) {
+                                try {
+                                    String nameO = dataSnapshot.child("userName").getValue(String.class);
+                                    String emailO = dataSnapshot.child("userEmail").getValue(String.class);
+                                    String phoneO = dataSnapshot.child("userPhone").getValue(String.class);
+                                    String addressO = dataSnapshot.child("userAddress").getValue(String.class);
+                                    String imageO = dataSnapshot.child("userImage").getValue(String.class);
 
-                            fprofileUName.setText(nameO);
-                            fprofileEmail.setText(emailO);
-                            fprofilePhone.setText(phoneO);
-                            fprofileAddress.setText(addressO);
-                            Glide.with(getActivity()).load(imageO).into(fprofileImage);
-                        } catch (Exception ignored) {
+                                    fprofileUName.setText(nameO);
+                                    fprofileEmail.setText(emailO);
+                                    fprofilePhone.setText(phoneO);
+                                    fprofileAddress.setText(addressO);
+                                    Glide.with(getActivity()).load(imageO).into(fprofileImage);
+                                } catch (Exception ignored) {
+                                }
+                            }
+
                         }
-                    }
 
-                }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+                        }
+                    });
         } catch (Exception e) {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -180,13 +181,14 @@ public class ProfileFragment extends Fragment {
                 map.put("userPhone", uPhone);
                 map.put("userAddress", uAddress);
 
-                mRef.child(mAuth.getCurrentUser().getUid()).updateChildren(map)
+                databaseRefs.referenceUIDUsers
+                        .updateChildren(map)
                         .addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
                                 try {
                                     loader2.dismiss();
                                     Toast.makeText(getActivity(), "Data Saved!", Toast.LENGTH_SHORT).show();
-                                    makeFieldsEnableFalse();
+                                    setManageFields(false);
                                     Log.e("checkStatusForAl", "notthe1sttimewithouturi");
                                 } catch (Exception ignored) {
 
@@ -212,13 +214,14 @@ public class ProfileFragment extends Fragment {
                         map.put("userPhone", uPhone);
                         map.put("userAddress", uAddress);
 
-                        mRef.child(mAuth.getCurrentUser().getUid()).updateChildren(map)
+                        databaseRefs.referenceUIDUsers
+                                .updateChildren(map)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
                                         try {
                                             loader2.dismiss();
                                             Toast.makeText(getActivity(), "Data Saved!", Toast.LENGTH_SHORT).show();
-                                            makeFieldsEnableFalse();
+                                            setManageFields(false);
                                             Log.e("checkStatusForAl", "notthe1sttimewithuri");
                                         } catch (Exception ignored) {
 
@@ -237,22 +240,43 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    private void makeFieldsEnableTrue() {
-        status = true;
-        p1.setEnabled(true);
-        p2.setEnabled(true);
-        p3.setEnabled(true);
-        p5.setEnabled(true);
-        fprofileSaveBtn.setEnabled(true);
-    }
+//    private void makeFieldsEnableTrue() {
+//        status = true;
+//        p1.setEnabled(true);
+//        p2.setEnabled(true);
+//        p3.setEnabled(true);
+//        p5.setEnabled(true);
+//        fprofileSaveBtn.setEnabled(true);
+//    }
+//
+//    private void makeFieldsEnableFalse() {
+//        status = false;
+//        p1.setEnabled(false);
+//        p2.setEnabled(false);
+//        p3.setEnabled(false);
+//        p5.setEnabled(false);
+//        fprofileSaveBtn.setEnabled(false);
+//    }
 
-    private void makeFieldsEnableFalse() {
-        status = false;
-        p1.setEnabled(false);
-        p2.setEnabled(false);
-        p3.setEnabled(false);
-        p5.setEnabled(false);
-        fprofileSaveBtn.setEnabled(false);
+    private void setManageFields(boolean b) {
+        if (b) {
+            status = true;
+            p1.setEnabled(true);
+            p2.setEnabled(true);
+            p3.setEnabled(true);
+            p5.setEnabled(true);
+            fprofileSaveBtn.setEnabled(true);
+            fprofileImage.setAlpha((float) 1.0);
+
+        } if (!b){
+            status = false;
+            p1.setEnabled(false);
+            p2.setEnabled(false);
+            p3.setEnabled(false);
+            p5.setEnabled(false);
+            fprofileSaveBtn.setEnabled(false);
+            fprofileImage.setAlpha((float) 0.5);
+        }
     }
 
     private void chooseImage() {

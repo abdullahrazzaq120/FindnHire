@@ -9,12 +9,13 @@
     android:orientation="vertical"
     tools:context=".Activities.SplashActivity">
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:src="@drawable/pwdlogo"
-        />
+        android:text="Find n Hire Logo"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/white" />
 
 </LinearLayout>
