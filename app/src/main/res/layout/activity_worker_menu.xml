@@ -10,11 +10,16 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayoutWorkerMenu_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/lightblue"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/darkblue"
-        app:tabMode="fixed"
+        android:layout_height="40dp"
+        android:background="@color/darkblue"
+        app:tabIndicator="@color/black"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorColor="@color/lightblue"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorGravity="center"
+        app:tabIndicatorHeight="40dp"
+        app:tabInlineLabel="true"
+        app:tabRippleColor="@color/white"
         app:tabTextColor="@color/white" />
 
     <androidx.viewpager.widget.ViewPager

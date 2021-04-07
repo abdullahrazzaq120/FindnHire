@@ -3,6 +3,7 @@
     package="com.sortscript.findnhire">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-feature
@@ -16,6 +17,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FindnHire">
+        <activity android:name=".Worker.WorkerActivities.WorkerProfileActivity"></activity>
+        <activity
+            android:name=".Worker.WorkerActivities.WorkerAvailabilityActivity"
+            android:parentActivityName=".Worker.WorkerActivities.WorkerMenu" />
+        <activity android:name=".Activities.ChangePasswordActivity" />
         <activity
             android:name=".Activities.SettingsActivity"
             android:screenOrientation="portrait" />
@@ -30,7 +36,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Worker.WorkerActivities.WorkerMenu"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Worker.WorkerActivities.WorkerLoginActivity"
             android:screenOrientation="portrait" />

@@ -13,27 +13,20 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.FirebaseException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.sortscript.findnhire.R;
 import com.sortscript.findnhire.Worker.WorkerActivities.WorkerMenu;
-import com.sortscript.findnhire.Worker.WorkerModels.ModelSetWorker;
 
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class VerifyNumberActivity extends AppCompatActivity {
 
@@ -43,7 +36,7 @@ public class VerifyNumberActivity extends AppCompatActivity {
     Button verifyCode, resendCode;
     ProgressBar progressBar;
     String verificationCodeBySystem;
-    String phoneNo, nameWorker;
+    String phoneNo;
     FirebaseAuth mAuth;
     DatabaseReference reference;
 
@@ -56,8 +49,6 @@ public class VerifyNumberActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference().child("Members").child("Workers");
-
-        getSupportActionBar().hide();
 
         userCode1 = findViewById(R.id.editcode1);
         userCode2 = findViewById(R.id.editcode2);
@@ -75,7 +66,6 @@ public class VerifyNumberActivity extends AppCompatActivity {
         progressBar.getIndeterminateDrawable().setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.MULTIPLY);
 
         phoneNo = getIntent().getStringExtra("Number");
-        nameWorker = getIntent().getStringExtra("WorkerName");
 
         VerificationCode(phoneNo);
 
@@ -258,6 +248,7 @@ public class VerifyNumberActivity extends AppCompatActivity {
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.d(TAG, "onVerificationFailed: " + e.getMessage());
         }
     };
 
@@ -268,8 +259,8 @@ public class VerifyNumberActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.d(TAG, "verifyCode: " + e.getMessage());
         }
-
     }
 
     private void signInByCredentials(PhoneAuthCredential credential) {
@@ -277,61 +268,16 @@ public class VerifyNumberActivity extends AppCompatActivity {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(VerifyNumberActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if (task.isSuccessful()) {
-
-                            new Handler().postDelayed(() -> {
-
-                                reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        if (snapshot.child(mAuth.getCurrentUser().getUid()).exists()) {
-                                            try {
-
-                                                Toast.makeText(VerifyNumberActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                                Intent i = new Intent(VerifyNumberActivity.this, WorkerMenu.class);
-                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                startActivity(i);
-                                                Log.d(TAG, "onComplete: User Exists");
-                                            } catch (Exception ignored) {
-                                            }
-                                        } else {
-                                            try {
-                                                ModelSetWorker modelSetWorker = new ModelSetWorker(nameWorker, "", mAuth.getCurrentUser().getPhoneNumber(),
-                                                        "", "", "", "", "", "");
-
-                                                reference.child(mAuth.getCurrentUser().getUid()).setValue(modelSetWorker)
-                                                        .addOnCompleteListener(task1 -> {
-                                                            if (task1.isSuccessful()) {
-                                                                Toast.makeText(VerifyNumberActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                                                Intent i = new Intent(VerifyNumberActivity.this, WorkerMenu.class);
-                                                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                                                startActivity(i);
-                                                            } else {
-                                                                Toast.makeText(VerifyNumberActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        });
-                                                Log.d(TAG, "onComplete: User Not Exists");
-                                            } catch (Exception ignored) {
-
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                    }
-                                });
-
-                            }, 2000);
-
-                        } else {
-                            Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            resendCode.setVisibility(View.VISIBLE);
-                        }
+                .addOnCompleteListener(VerifyNumberActivity.this, task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(VerifyNumberActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(VerifyNumberActivity.this, WorkerMenu.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i);
+                    } else {
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        Log.d(TAG, "signInByCredentials: " + task.getException().getMessage());
+                        resendCode.setVisibility(View.VISIBLE);
                     }
                 });
     }
@@ -340,11 +286,6 @@ public class VerifyNumberActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                resendCode.setVisibility(View.VISIBLE);
-            }
-        }, 60000);
+        new Handler().postDelayed(() -> resendCode.setVisibility(View.VISIBLE), 60000);
     }
 }

@@ -23,6 +23,14 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="categories">
+        <item>Painter</item>
+        <item>Carpenter</item>
+        <item>Plumber</item>
+        <item>Labour</item>
+        <item>Ac Repairer</item>
+    </string-array>
+
     <string name="firebase_server_key">AAAAqcC1nic:APA91bHI3BPlGWsb3-FMTaASbbxN0S2D31sYKw9eTbnlvmNM51NoFACFxkGRdOwu9PGbKsOnGrNrXDyDKot9MMj63SxoG7QzXsx7AI-o7Td-goKJOZbTlofrWr-ZmqmkFOi4V7P72Mt6</string>
 
 </resources>

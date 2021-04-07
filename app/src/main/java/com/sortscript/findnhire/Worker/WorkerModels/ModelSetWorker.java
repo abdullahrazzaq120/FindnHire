@@ -1,95 +1,57 @@
 package com.sortscript.findnhire.Worker.WorkerModels;
 
 public class ModelSetWorker {
-    String WorkerName, WorkerCategory, WorkerPhone, WorkerAvailableDate, WorkerAvailableTime,
-            WorkerAddress, WorkerImage, WorkerGender, WorkerSpecification;
+    String workerName, workerImage, workerProfession, workerContact, workerSpecification;
 
     public ModelSetWorker() {
     }
 
-    public ModelSetWorker(String workerName, String workerCategory, String workerPhone,
-                          String workerAvailableDate, String workerAvailableTime, String workerAddress,
-                          String workerImage, String workerGender, String workerSpecification) {
-        WorkerName = workerName;
-        WorkerCategory = workerCategory;
-        WorkerPhone = workerPhone;
-        WorkerAvailableDate = workerAvailableDate;
-        WorkerAvailableTime = workerAvailableTime;
-        WorkerAddress = workerAddress;
-        WorkerImage = workerImage;
-        WorkerGender = workerGender;
-        WorkerSpecification = workerSpecification;
+    public ModelSetWorker(String workerName, String workerImage, String workerProfession, String workerContact,
+                          String workerSpecification) {
+        this.workerName = workerName;
+        this.workerImage = workerImage;
+        this.workerProfession = workerProfession;
+        this.workerContact = workerContact;
+        this.workerSpecification = workerSpecification;
     }
 
     public String getWorkerName() {
-        return WorkerName;
+        return workerName;
     }
 
     public void setWorkerName(String workerName) {
-        WorkerName = workerName;
-    }
-
-    public String getWorkerCategory() {
-        return WorkerCategory;
-    }
-
-    public void setWorkerCategory(String workerCategory) {
-        WorkerCategory = workerCategory;
-    }
-
-    public String getWorkerPhone() {
-        return WorkerPhone;
-    }
-
-    public void setWorkerPhone(String workerPhone) {
-        WorkerPhone = workerPhone;
-    }
-
-    public String getWorkerAvailableDate() {
-        return WorkerAvailableDate;
-    }
-
-    public void setWorkerAvailableDate(String workerAvailableDate) {
-        WorkerAvailableDate = workerAvailableDate;
-    }
-
-    public String getWorkerAvailableTime() {
-        return WorkerAvailableTime;
-    }
-
-    public void setWorkerAvailableTime(String workerAvailableTime) {
-        WorkerAvailableTime = workerAvailableTime;
-    }
-
-    public String getWorkerAddress() {
-        return WorkerAddress;
-    }
-
-    public void setWorkerAddress(String workerAddress) {
-        WorkerAddress = workerAddress;
+        this.workerName = workerName;
     }
 
     public String getWorkerImage() {
-        return WorkerImage;
+        return workerImage;
     }
 
     public void setWorkerImage(String workerImage) {
-        WorkerImage = workerImage;
+        this.workerImage = workerImage;
     }
 
-    public String getWorkerGender() {
-        return WorkerGender;
+    public String getWorkerProfession() {
+        return workerProfession;
     }
 
-    public void setWorkerGender(String workerGender) {
-        WorkerGender = workerGender;
+    public void setWorkerProfession(String workerProfession) {
+        this.workerProfession = workerProfession;
+    }
+
+    public String getWorkerContact() {
+        return workerContact;
+    }
+
+    public void setWorkerContact(String workerContact) {
+        this.workerContact = workerContact;
     }
 
     public String getWorkerSpecification() {
-        return WorkerSpecification;
+        return workerSpecification;
     }
 
     public void setWorkerSpecification(String workerSpecification) {
-        WorkerSpecification = workerSpecification;
+        this.workerSpecification = workerSpecification;
     }
 }

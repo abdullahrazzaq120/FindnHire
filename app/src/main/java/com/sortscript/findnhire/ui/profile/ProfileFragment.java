@@ -74,7 +74,6 @@ public class ProfileFragment extends Fragment {
 
         fprofileEditBtn.setOnClickListener(view -> {
             setManageFields(true);
-//            makeFieldsEnableTrue();
         });
 
         fprofileSaveBtn.setOnClickListener(view -> {
@@ -239,24 +238,6 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
-//    private void makeFieldsEnableTrue() {
-//        status = true;
-//        p1.setEnabled(true);
-//        p2.setEnabled(true);
-//        p3.setEnabled(true);
-//        p5.setEnabled(true);
-//        fprofileSaveBtn.setEnabled(true);
-//    }
-//
-//    private void makeFieldsEnableFalse() {
-//        status = false;
-//        p1.setEnabled(false);
-//        p2.setEnabled(false);
-//        p3.setEnabled(false);
-//        p5.setEnabled(false);
-//        fprofileSaveBtn.setEnabled(false);
-//    }
 
     private void setManageFields(boolean b) {
         if (b) {

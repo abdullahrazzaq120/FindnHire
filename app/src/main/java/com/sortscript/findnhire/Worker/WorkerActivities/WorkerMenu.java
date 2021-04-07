@@ -1,10 +1,12 @@
 package com.sortscript.findnhire.Worker.WorkerActivities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,20 +16,24 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.sortscript.findnhire.Classes.DatabaseRefs;
 import com.sortscript.findnhire.View_Pager_Adapters.ViewPagerAdapter;
 import com.sortscript.findnhire.Activities.AuthenticationActivity;
 import com.sortscript.findnhire.R;
-import com.sortscript.findnhire.Worker.WorkerFragments.FragmentChatWorker;
 import com.sortscript.findnhire.Worker.WorkerFragments.FragmentNotificationWorker;
-import com.sortscript.findnhire.Worker.WorkerFragments.FragmentRequestsWorker;
+import com.sortscript.findnhire.Worker.WorkerFragments.FragmentHomeWorker;
 import com.sortscript.findnhire.ui.notification.NotificationViewModel;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import dmax.dialog.SpotsDialog;
 
 public class WorkerMenu extends AppCompatActivity {
 
@@ -36,22 +42,49 @@ public class WorkerMenu extends AppCompatActivity {
     private ViewPagerAdapter adapter;
     private NotificationViewModel notificationViewModel;
     FirebaseAuth mAuth;
-    DatabaseReference reference;
+    DatabaseRefs refs;
+    private SpotsDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker_menu);
 
+        progressDialog = new SpotsDialog(WorkerMenu.this, R.style.Custom);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
         mAuth = FirebaseAuth.getInstance();
-        reference = FirebaseDatabase.getInstance().getReference().child("Members").child("Workers");
+        refs = new DatabaseRefs();
+
+        refs.referenceUIDWorkers
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            try {
+                                String nameW = snapshot.child("workerName").getValue().toString();
+                                String catW = snapshot.child("workerCategory").getValue().toString();
+                                getSupportActionBar().setTitle(nameW + " : " + catW);
+                            } catch (Exception ignored) {
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
         tabLayout = findViewById(R.id.tablayoutWorkerMenu_id);
         viewPager = findViewById(R.id.viewpagerWorkerMenu_id);
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         //add fragment here
-        adapter.AddFragment(new FragmentRequestsWorker(), "Requests");
-        adapter.AddFragment(new FragmentChatWorker(), "Chats");
+        adapter.AddFragment(new FragmentHomeWorker(), "Availability");
         adapter.AddFragment(new FragmentNotificationWorker(), "Notifications");
 
         viewPager.setAdapter(adapter);
@@ -81,14 +114,11 @@ public class WorkerMenu extends AppCompatActivity {
             TextView tv1 = v2.findViewById(R.id.yesLogoutBtnId);
             TextView tv2 = v2.findViewById(R.id.cancelLogoutBtnId);
 
-            tv1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mAuth.signOut();
-                    startActivity(new Intent(WorkerMenu.this, AuthenticationActivity.class));
-                    finish();
-                    alertDialog.dismiss();
-                }
+            tv1.setOnClickListener(view -> {
+                mAuth.signOut();
+                startActivity(new Intent(WorkerMenu.this, AuthenticationActivity.class));
+                finish();
+                alertDialog.dismiss();
             });
 
             tv2.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +138,27 @@ public class WorkerMenu extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        String tkn = FirebaseInstanceId.getInstance().getToken();
-        reference.child(mAuth.getCurrentUser().getUid()).child("deviceToken").setValue(tkn);
+        refs.referenceUIDWorkers
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            try {
+                                String tkn = FirebaseInstanceId.getInstance().getToken();
+                                refs.referenceUIDWorkers.child("deviceToken").setValue(tkn);
+                            } catch (Exception ignored) {
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+        new Handler().postDelayed(() -> {
+            progressDialog.dismiss();
+        }, 2000);
     }
 }

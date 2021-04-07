@@ -20,27 +20,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/lightgrey" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Worker Name"
-        android:textColorHint="@color/lightgrey"
-        app:startIconDrawable="@drawable/ic_baseline_account_circle_24"
-        app:startIconTint="@color/white">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/workerNameId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:textColor="@color/white"
-            android:textColorHint="@color/lightgrey" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,6 +53,8 @@
             android:hint="Phone Number"
             android:textColor="@color/lightgrey"
             android:textColorHint="@color/lightgrey"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
             app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
             app:startIconTint="@color/white">
 

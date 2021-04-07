@@ -285,12 +285,12 @@ public class AuthenticationActivity extends AppCompatActivity {
         }
     }
 
-    private boolean validEmail(String emailSU) {
+    public boolean validEmail(String emailSU) {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         return emailSU.matches(emailPattern);
     }
 
-    private boolean validPassword(String passwordSU) {
+    public boolean validPassword(String passwordSU) {
         Pattern pattern;
         Matcher matcher;
         final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[_@#$%^&+=!])(?=\\S+$).{4,}$";

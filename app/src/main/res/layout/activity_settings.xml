@@ -4,57 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightgrey"
+    android:background="@color/lightblue2"
     android:orientation="vertical"
     tools:context=".Activities.SettingsActivity">
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:src="@drawable/findnhirelogo" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@color/lightblue2"
         android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:src="@drawable/findnhirelogo" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/accountSettingTv1Id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
+            android:background="@color/darkblue"
+            android:drawableTint="@color/white"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp"
+            android:text="Change Account Settings"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_margin="1dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_baseline_expand_less_24" />
 
-            <TextView
-                android:id="@+id/accountSettingTv1Id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/darkblue"
-                android:drawableTint="@color/white"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="8dp"
-                android:text="Change Account Settings"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:drawableEndCompat="@drawable/ic_baseline_expand_less_24" />
+        <TextView
+            android:id="@+id/changePasswordTvId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="1dp"
+            android:background="@color/lightgrey"
+            android:drawableTint="@color/darkblue"
+            android:paddingHorizontal="30dp"
+            android:paddingVertical="5dp"
+            android:text="Change Password"
+            android:textColor="@color/darkblue"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:drawableStartCompat="@drawable/ic_baseline_arrow_right_24" />
 
-            <TextView
-                android:id="@+id/changePasswordTvId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@color/lightblue"
-                android:drawableTint="@color/lightgrey"
-                android:paddingHorizontal="30dp"
-                android:paddingVertical="5dp"
-                android:text="Change Password"
-                android:textColor="@color/lightgrey"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:drawableStartCompat="@drawable/ic_baseline_arrow_right_24" />
-
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
