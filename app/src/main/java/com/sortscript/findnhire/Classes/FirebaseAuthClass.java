@@ -20,16 +20,18 @@ import java.util.logging.LogRecord;
 
 import androidx.annotation.NonNull;
 
+import dmax.dialog.SpotsDialog;
+
 public class FirebaseAuthClass implements FirebaseAuthInterface {
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Members").child("Users");
     Context context;
-    ProgressDialog loader;
+    SpotsDialog progressDialog;
 
-    public FirebaseAuthClass(Context context, ProgressDialog loader) {
+    public FirebaseAuthClass(Context context, SpotsDialog progressDialog) {
         this.context = context;
-        this.loader = loader;
+        this.progressDialog = progressDialog;
     }
 
     @Override
@@ -38,13 +40,13 @@ public class FirebaseAuthClass implements FirebaseAuthInterface {
         mAuth.signInWithEmailAndPassword(emailSignIn, passwordSignIn)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        loader.dismiss();
+                        progressDialog.dismiss();
                         Toast.makeText(context, "User Sign In Successfully!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(context, UserMenu.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(intent);
                     } else {
-                        loader.dismiss();
+                        progressDialog.dismiss();
                         Toast.makeText(context, "Incorrect Email or Password!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -69,19 +71,19 @@ public class FirebaseAuthClass implements FirebaseAuthInterface {
                                 .setValue(modelSetUsers)
                                 .addOnCompleteListener(task1 -> {
                                     if (task1.isSuccessful()) {
-                                        loader.dismiss();
+                                        progressDialog.dismiss();
                                         Toast.makeText(context, "User Sign Up Successfully!", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(context, UserMenu.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         context.startActivity(intent);
                                     } else {
-                                        loader.dismiss();
+                                        progressDialog.dismiss();
                                         Toast.makeText(context, "Unable to Save your Data!", Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
                     } else {
-                        loader.dismiss();
+                        progressDialog.dismiss();
                         Toast.makeText(context, "Unable to Register the User!", Toast.LENGTH_SHORT).show();
                     }
                 });

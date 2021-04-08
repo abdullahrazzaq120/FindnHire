@@ -18,6 +18,7 @@ public class DatabaseRefs {
     public DatabaseReference referenceWorkers = mainReference.child("Members").child("Workers");
     public DatabaseReference referenceUsers = mainReference.child("Members").child("Users");
     public DatabaseReference referenceUIDWorkers = mainReference.child("Members").child("Workers").child(uid);
+    public DatabaseReference referenceWorkersTimings = mainReference.child("Timings");
     public DatabaseReference referenceWorkersUIDTimings = mainReference.child("Timings").child(uid);
     public DatabaseReference referenceUIDUsers = mainReference.child("Members").child("Users").child(uid);
     public StorageReference mStorageRefImg = FirebaseStorage.getInstance().getReference().child("Members").child("Workers");

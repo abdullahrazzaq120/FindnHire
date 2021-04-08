@@ -28,6 +28,8 @@ import java.util.regex.Pattern;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import dmax.dialog.SpotsDialog;
+
 public class AuthenticationActivity extends AppCompatActivity {
 
     private static final String TAG = "AuthenticationActivity";
@@ -41,7 +43,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     Button userSignUpBtn, userSignInBtn;
     String genderLink;
     FirebaseAuthClass firebaseAuthClass;
-    ProgressDialog loader;
+    private SpotsDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,10 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        loader = new ProgressDialog(AuthenticationActivity.this);
+        progressDialog = new SpotsDialog(AuthenticationActivity.this, R.style.CustomPleaseWait);
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+
         workerGoToLoginTv = findViewById(R.id.workerGoToLoginBtnId);
         clickSignUpTv = findViewById(R.id.clickSignUpTvId);
         clickSignInTv = findViewById(R.id.clickSignInTvId);
@@ -97,24 +102,21 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         userSignInBtn.setOnClickListener(view -> {
 
-            loader.setMessage("Signing In...");
-            loader.setCancelable(false);
-            loader.setCanceledOnTouchOutside(false);
-            loader.show();
+            progressDialog.show();
 
             String emailSI = emailSignIn.getText().toString().trim();
             String passwordSI = passwordSignIn.getText().toString().trim();
-            firebaseAuthClass = new FirebaseAuthClass(getApplicationContext(), loader);
+            firebaseAuthClass = new FirebaseAuthClass(getApplicationContext(), progressDialog);
             if (emailSI.isEmpty()) {
-                loader.dismiss();
+                progressDialog.dismiss();
                 emailSignIn.setError("Email Required!");
                 emailSignIn.requestFocus();
             } else if (!validEmail(emailSI)) {
-                loader.dismiss();
+                progressDialog.dismiss();
                 emailSignIn.setError("Invalid Email!");
                 emailSignIn.requestFocus();
             } else if (passwordSI.isEmpty()) {
-                loader.dismiss();
+                progressDialog.dismiss();
                 passwordSignIn.setError("Password Required!");
                 passwordSignIn.requestFocus();
             } else {
@@ -123,12 +125,9 @@ public class AuthenticationActivity extends AppCompatActivity {
         });
 
         userSignUpBtn.setOnClickListener(view -> {
-            loader.setMessage("Signing Up...");
-            loader.setCancelable(false);
-            loader.setCanceledOnTouchOutside(false);
-            loader.show();
+            progressDialog.show();
 
-            register(loader);
+            register(progressDialog);
 
         });
 
@@ -215,7 +214,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         userSignUpBtn = vSignUp.findViewById(R.id.userSignUpBtnId);
     }
 
-    public void register(ProgressDialog loader2) {
+    public void register(SpotsDialog loader2) {
 
         String userNameSU = userNameSignUpEt.getText().toString();
         String emailSU = userEmailSignUpEt.getText().toString().trim();
@@ -280,7 +279,7 @@ public class AuthenticationActivity extends AppCompatActivity {
             userCheckedCb.requestFocus();
         } else {
             String dob = dayOB + "-" + monthOB + "-" + yearOB;
-            firebaseAuthClass = new FirebaseAuthClass(getApplicationContext(), loader);
+            firebaseAuthClass = new FirebaseAuthClass(getApplicationContext(), progressDialog);
             firebaseAuthClass.signUp(userNameSU, emailSU, passwordSU, addressSU, dob, genderLink);
         }
     }

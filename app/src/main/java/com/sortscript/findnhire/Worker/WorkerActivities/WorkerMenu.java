@@ -157,8 +157,12 @@ public class WorkerMenu extends AppCompatActivity {
                     }
                 });
 
-        new Handler().postDelayed(() -> {
-            progressDialog.dismiss();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.dismiss();
+            }
         }, 2000);
+
     }
 }

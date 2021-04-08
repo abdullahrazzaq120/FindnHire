@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sortscript.findnhire.Activities.PostForWorker;
+import com.sortscript.findnhire.Activities.WorkersList;
 import com.sortscript.findnhire.R;
 
 import androidx.annotation.NonNull;
@@ -39,40 +39,43 @@ public class HomeHolderCategory extends RecyclerView.ViewHolder implements View.
         switch (getAdapterPosition()) {
 
             case 0:
-                intent = new Intent(context, PostForWorker.class);
+                intent = new Intent(context, WorkersList.class);
                 intent.putExtra("Node", nodes[0]);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
                 break;
 
             case 1:
-                intent = new Intent(context, PostForWorker.class);
+                intent = new Intent(context, WorkersList.class);
                 intent.putExtra("Node", nodes[1]);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
                 break;
 
             case 2:
-                intent = new Intent(context, PostForWorker.class);
+                intent = new Intent(context, WorkersList.class);
                 intent.putExtra("Node", nodes[2]);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
                 break;
 
 
             case 3:
-                intent = new Intent(context, PostForWorker.class);
+                intent = new Intent(context, WorkersList.class);
                 intent.putExtra("Node", nodes[3]);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
                 break;
 
-
             case 4:
-                intent = new Intent(context, PostForWorker.class);
+                intent = new Intent(context, WorkersList.class);
                 intent.putExtra("Node", nodes[4]);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
                 break;
 
             default:
                 Toast.makeText(context, "Category pending ", Toast.LENGTH_SHORT).show();
-
         }
     }
 }

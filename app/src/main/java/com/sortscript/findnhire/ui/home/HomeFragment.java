@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
         ArrayList<HomeModelCategory> models = new ArrayList<>();
 
         //0
-        HomeModelCategory m = new HomeModelCategory();
+        HomeModelCategory m;
         m = new HomeModelCategory();
         m.setWorker_title_category("Plumber");
         m.setWorker_image_category(R.drawable.plumber);

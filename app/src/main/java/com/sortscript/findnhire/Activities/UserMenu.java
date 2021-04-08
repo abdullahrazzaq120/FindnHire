@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.mikhaellopez.circularimageview.CircularImageView;
+import com.sortscript.findnhire.Classes.DatabaseRefs;
 import com.sortscript.findnhire.R;
 
 import androidx.annotation.NonNull;
@@ -40,7 +41,7 @@ public class UserMenu extends AppCompatActivity {
     FirebaseAuth mAuth;
     CircularImageView imageViewUser;
     TextView usernameUser, mobileUser;
-    DatabaseReference reference;
+    DatabaseRefs refs;
     private static final String TAG = "UserMenu";
 
     @Override
@@ -49,7 +50,7 @@ public class UserMenu extends AppCompatActivity {
         setContentView(R.layout.activity_user_menu);
 
         mAuth = FirebaseAuth.getInstance();
-        reference = FirebaseDatabase.getInstance().getReference().child("Members").child("Users");
+        refs = new DatabaseRefs();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,8 +63,8 @@ public class UserMenu extends AppCompatActivity {
         usernameUser = v.findViewById(R.id.usernameId);
         mobileUser = v.findViewById(R.id.mobileUserId);
 
-        reference
-                .child(mAuth.getCurrentUser().getUid())
+        refs
+                .referenceUIDUsers
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -164,6 +165,6 @@ public class UserMenu extends AppCompatActivity {
         super.onStart();
 
         String tkn = FirebaseInstanceId.getInstance().getToken();
-        reference.child(mAuth.getCurrentUser().getUid()).child("deviceToken").setValue(tkn);
+        refs.referenceUIDUsers.child("deviceToken").setValue(tkn);
     }
 }

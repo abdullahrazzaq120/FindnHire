@@ -3,11 +3,8 @@ package com.sortscript.findnhire.Classes;
 import android.content.Context;
 import android.os.CountDownTimer;
 import android.widget.ImageView;
-
 import androidx.core.widget.NestedScrollView;
-
 import com.sortscript.findnhire.Interfaces.AnimateScroll;
-
 public class SetAnimatedScroll implements AnimateScroll {
 
     Context context;

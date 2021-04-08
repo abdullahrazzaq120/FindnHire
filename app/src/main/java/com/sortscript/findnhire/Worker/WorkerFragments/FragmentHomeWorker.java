@@ -39,6 +39,7 @@ public class FragmentHomeWorker extends Fragment {
     RetrieveWorkerDetail retrieveWorkerDetail;
     DatabaseRefs refs;
 
+
     public FragmentHomeWorker() {
         retrieveWorkerDetail = new RetrieveWorkerDetail(getActivity());
     }

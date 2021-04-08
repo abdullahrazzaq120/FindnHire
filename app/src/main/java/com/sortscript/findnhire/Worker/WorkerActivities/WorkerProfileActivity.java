@@ -89,6 +89,24 @@ public class WorkerProfileActivity extends AppCompatActivity {
         retrieveWorkerDetail.setUtils(new SimpleCallback<String>() {
             @Override
             public void callback(String img, String name, String profession, String contact, String specs) {
+
+                ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(WorkerProfileActivity.this,
+                        R.array.categories, R.layout.spinner_items);
+                arrayAdapter.setDropDownViewResource(R.layout.spinner_items);
+                workerCategoryProfileSpinner.setAdapter(arrayAdapter);
+                workerCategoryProfileSpinner.setSelection(arrayAdapter.getPosition(profession));
+                workerCategoryProfileSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        category = parent.getItemAtPosition(position).toString();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+
+
                 Glide.with(getApplicationContext()).load(img).into(workerImageProfileIv);
                 workerNameProfileEt.setText(name);
                 workerSpecificationProfileEt.setText(specs);

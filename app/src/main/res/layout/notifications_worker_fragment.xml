@@ -13,7 +13,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/workerNotificationsRvId"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -17,7 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FindnHire">
-        <activity android:name=".Worker.WorkerActivities.WorkerProfileActivity"></activity>
+        <activity
+            android:name=".Activities.WorkerDetailsActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Worker.WorkerActivities.WorkerProfileActivity" />
         <activity
             android:name=".Worker.WorkerActivities.WorkerAvailabilityActivity"
             android:parentActivityName=".Worker.WorkerActivities.WorkerMenu" />
@@ -48,7 +51,7 @@
             android:name=".Activities.AuthenticationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.PostForWorker"
+            android:name=".Activities.WorkersList"
             android:parentActivityName=".Activities.UserMenu"
             android:screenOrientation="portrait" />
         <activity
