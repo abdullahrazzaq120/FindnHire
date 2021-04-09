@@ -12,15 +12,6 @@
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_baseline_account_circle_24"
             android:title="@string/menu_profile" />
-        <item
-            android:id="@+id/nav_notification"
-            android:icon="@drawable/ic_baseline_notifications_24"
-            android:title="@string/menu_notification" />
-
-        <item
-            android:id="@+id/nav_post"
-            android:icon="@drawable/ic_baseline_local_post_office_24"
-            android:title="@string/menu_post" />
 
         <item
             android:id="@+id/nav_howwework"

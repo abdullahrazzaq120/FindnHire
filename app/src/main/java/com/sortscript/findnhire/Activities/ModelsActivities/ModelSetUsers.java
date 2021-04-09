@@ -1,4 +1,4 @@
-package com.sortscript.findnhire.Activities;
+package com.sortscript.findnhire.Activities.ModelsActivities;
 
 public class ModelSetUsers {
     String userName, userEmail, userPassword, userAddress, userDOB, userGender, userPhone, userImage;

@@ -23,17 +23,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingVertical="6dp">
+            android:background="@color/lightblue3"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
+                android:background="@drawable/border4"
                 android:orientation="horizontal"
+                android:padding="8dp"
                 android:weightSum="2">
 
                 <TextView
@@ -60,8 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
+                android:background="@drawable/border4"
                 android:orientation="horizontal"
+                android:padding="8dp"
                 android:weightSum="2">
 
                 <TextView
@@ -89,8 +89,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
+                android:background="@drawable/border4"
                 android:orientation="horizontal"
+                android:padding="8dp"
                 android:weightSum="2">
 
                 <TextView
@@ -117,8 +118,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:orientation="vertical">
+                android:background="@drawable/border4"
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -144,8 +146,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:orientation="vertical">
+                android:background="@drawable/border4"
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -173,6 +176,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
                     android:text="Comments :"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/black"
@@ -180,7 +184,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/asjdnas"
@@ -188,6 +193,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
+                        android:layout_toStartOf="@+id/sendBtnRlId"
                         android:textColorHint="@color/darkblue"
                         app:startIconDrawable="@drawable/ic_baseline_comment_24"
                         app:startIconTint="@color/darkblue">
@@ -204,6 +210,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <RelativeLayout
+                        android:id="@+id/sendBtnRlId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -223,11 +230,26 @@
 
                 </RelativeLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/workerDetailsRvId"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/asjdnas" />
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/noCommentsYetTvId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="No Comments Yet"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/workerDetailsRvId"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="200dp"
+                        android:nestedScrollingEnabled="false" />
+
+                </RelativeLayout>
 
             </LinearLayout>
 

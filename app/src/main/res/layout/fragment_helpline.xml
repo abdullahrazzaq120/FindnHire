@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkblue"
+    android:background="@color/lightblue"
     android:orientation="vertical"
     android:weightSum="10"
     tools:context=".ui.helpline.HelplineFragment">
@@ -27,98 +27,21 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:layout_weight="0.5"
+        android:gravity="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:clickable="false"
-            android:hint="+923094538069"
-            app:startIconDrawable="@drawable/ic_baseline_phone_android_24">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:textColor="@color/lightgrey"
-                android:textColorHint="@color/lightgrey" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:clickable="false"
-            android:hint="Johar Town, Lahore"
-            app:startIconDrawable="@drawable/ic_baseline_location_city_24">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:textColor="@color/lightgrey"
-                android:textColorHint="@color/lightgrey" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
-        android:gravity="center">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:clickable="false"
-            android:hint="ABC@gmail.com"
-            app:startIconDrawable="@drawable/ic_baseline_local_post_office_24">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:textColor="@color/lightgrey"
-                android:textColorHint="@color/lightgrey" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-    </LinearLayout>
-
+        android:layout_weight="0.5"
+        android:gravity="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -131,6 +54,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type a Message!"
+            app:startIconDrawable="@drawable/ic_baseline_comment_24">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/helplineTextId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:textColor="@color/darkblue"
+                android:textColorHint="@color/darkblue" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="end"
         android:layout_margin="5dp"
@@ -139,12 +91,14 @@
 
 
         <ImageView
+            android:id="@+id/helplineBtnId"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:src="@drawable/ic_baseline_local_post_office_24" />
+            android:src="@drawable/ic_baseline_local_post_office_24"
+            app:tint="@color/darkblue" />
 
 
     </LinearLayout>

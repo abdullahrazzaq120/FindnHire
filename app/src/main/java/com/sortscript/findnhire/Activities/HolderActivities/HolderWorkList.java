@@ -1,4 +1,4 @@
-package com.sortscript.findnhire.Activities;
+package com.sortscript.findnhire.Activities.HolderActivities;
 
 import android.view.View;
 import android.widget.TextView;
@@ -24,12 +24,7 @@ public class HolderWorkList extends RecyclerView.ViewHolder {
         workerListProfession = itemView.findViewById(R.id.workerListProfessionId);
         workerListSpecificationTv = itemView.findViewById(R.id.workerListSpecificationTvId);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mClickListener.onItemClick(v, getAdapterPosition());
-            }
-        });
+        itemView.setOnClickListener(v -> mClickListener.onItemClick(v, getAdapterPosition()));
     }
 
     private HolderWorkList.ClickListener mClickListener;

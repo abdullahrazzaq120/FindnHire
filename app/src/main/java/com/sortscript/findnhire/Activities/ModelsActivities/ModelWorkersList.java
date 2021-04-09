@@ -1,4 +1,4 @@
-package com.sortscript.findnhire.Activities;
+package com.sortscript.findnhire.Activities.ModelsActivities;
 
 public class ModelWorkersList {
     String workerImage, workerName, workerProfession, workerSpecification;

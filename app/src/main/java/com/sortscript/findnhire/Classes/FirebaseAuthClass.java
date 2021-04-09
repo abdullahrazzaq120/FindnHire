@@ -1,24 +1,15 @@
 package com.sortscript.findnhire.Classes;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.sortscript.findnhire.Activities.ModelSetUsers;
+import com.sortscript.findnhire.Activities.ModelsActivities.ModelSetUsers;
 import com.sortscript.findnhire.Activities.UserMenu;
 import com.sortscript.findnhire.Interfaces.FirebaseAuthInterface;
-
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
-
-import androidx.annotation.NonNull;
 
 import dmax.dialog.SpotsDialog;
 

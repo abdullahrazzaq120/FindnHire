@@ -1,6 +1,5 @@
 package com.sortscript.findnhire.Worker.WorkerActivities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,24 +13,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.sortscript.findnhire.Classes.DatabaseRefs;
-import com.sortscript.findnhire.View_Pager_Adapters.ViewPagerAdapter;
 import com.sortscript.findnhire.Activities.AuthenticationActivity;
+import com.sortscript.findnhire.Classes.DatabaseRefs;
 import com.sortscript.findnhire.R;
-import com.sortscript.findnhire.Worker.WorkerFragments.FragmentNotificationWorker;
+import com.sortscript.findnhire.View_Pager_Adapters.ViewPagerAdapter;
 import com.sortscript.findnhire.Worker.WorkerFragments.FragmentHomeWorker;
-import com.sortscript.findnhire.ui.notification.NotificationViewModel;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
+import com.sortscript.findnhire.Worker.WorkerFragments.FragmentNotificationWorker;
 
 import dmax.dialog.SpotsDialog;
 
@@ -40,7 +38,6 @@ public class WorkerMenu extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
-    private NotificationViewModel notificationViewModel;
     FirebaseAuth mAuth;
     DatabaseRefs refs;
     private SpotsDialog progressDialog;
@@ -85,7 +82,7 @@ public class WorkerMenu extends AppCompatActivity {
 
         //add fragment here
         adapter.AddFragment(new FragmentHomeWorker(), "Availability");
-        adapter.AddFragment(new FragmentNotificationWorker(), "Notifications");
+        adapter.AddFragment(new FragmentNotificationWorker(), "Reviews");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

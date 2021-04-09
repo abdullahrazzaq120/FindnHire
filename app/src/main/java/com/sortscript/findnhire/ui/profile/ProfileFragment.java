@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mikhaellopez.circularimageview.CircularImageView;
-import com.sortscript.findnhire.Activities.ModelSetUsers;
+import com.sortscript.findnhire.Activities.ModelsActivities.ModelSetUsers;
 import com.sortscript.findnhire.Classes.DatabaseRefs;
 import com.sortscript.findnhire.R;
 

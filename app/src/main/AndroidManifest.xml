@@ -29,15 +29,6 @@
             android:name=".Activities.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.ChatRoomActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.notification.OpenOfferNotifyWorkerProfileActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".Worker.WorkerActivities.OpenClientRequestActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Worker.WorkerActivities.WorkerMenu"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
